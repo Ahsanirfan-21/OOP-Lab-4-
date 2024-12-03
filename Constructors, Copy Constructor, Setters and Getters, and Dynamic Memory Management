@@ -1,0 +1,93 @@
+#include <iostream>
+#include <string> 
+using namespace std;
+class SalonEmployee {
+private:
+    string name;
+    string gender;
+    string contactNumber;
+    double salary;
+    string shift;
+
+public:
+    SalonEmployee(const string& empName = "Unknown", const string& empGender = "Unknown", const string& contact = "Unknown", double empSalary = 0.0, const string& empShift = "Unknown")
+        : name(empName), gender(empGender), contactNumber(contact), salary(empSalary), shift(empShift) {
+        cout << "Parameterized Constructor Invoked for Employee: " << name << endl;
+    }
+    SalonEmployee(const SalonEmployee& obj)
+        : name(obj.name), gender(obj.gender), contactNumber(obj.contactNumber),salary(obj.salary), shift(obj.shift) {
+        cout << "Copy Constructor Invoked for Employee: " << name << endl;
+    }
+    void setName(const string& empName) { 
+        name = empName;
+    }
+    void setGender(const string& empGender) {
+        gender = empGender;
+    }
+    void setContactNumber(const string& contact) {
+        contactNumber = contact;
+    }
+    void setSalary(double empSalary) {
+        salary = empSalary; 
+    }
+    void setShift(const string& empShift) { 
+        shift = empShift; 
+    }
+    string getName() const {
+        return name;
+    }
+    string getGender() const {
+        return gender;
+    }
+    string getContactNumber() const { 
+        return contactNumber;
+    }
+    double getSalary() const {
+        return salary;
+    }
+    string getShift() const {
+        return shift;
+    }
+    void display() const {
+        cout << "Name: " << name << endl;
+        cout << "Gender: " << gender << endl;
+        cout << "Contact Number: " << contactNumber << endl;
+        cout << "Salary: " << salary << endl;
+        cout << "Shift: " << shift << endl;
+    }
+};
+
+int main() {
+    // Creating Employee Objects
+    SalonEmployee emp1("Alice", "Female", "0300-1234567", 50000, "Morning");
+    SalonEmployee emp2("Bob", "Male", "0301-7654321", 45000, "Evening");
+
+    // Display Employee Details
+    cout << "Employee 1 Details:" << endl;
+    emp1.display();
+    cout << "------------------------" << endl;
+
+    cout << "Employee 2 Details:" << endl;
+    emp2.display();
+    cout << "------------------------" << endl;
+
+    // Using Copy Constructor
+    SalonEmployee emp3 = emp1;
+    cout << "Employee 3 (Copied from Employee 1) Details:" << endl;
+    emp3.display();
+    cout << "------------------------" << endl;
+
+    // Testing Setters
+    emp2.setName("Charlie");
+    emp2.setGender("Male");
+    emp2.setContactNumber("0312-3456789");
+    emp2.setSalary(47000);
+    emp2.setShift("Night");
+
+    cout << "Updated Employee 2 Details:" << endl;
+    emp2.display();
+    cout << "------------------------" << endl;
+
+    // Destructor will be called automatically for all objects
+    return 0;
+}
