@@ -1,0 +1,32 @@
+#include <iostream>
+
+class Counter {
+private:
+    static int objectCount;
+
+public:
+    // Constructor
+    Counter() {
+        objectCount++;
+    }
+
+    // Static function to get object count
+    static int getObjectCount() {
+        return objectCount;
+    }
+};
+
+// Initialize static member of class Counter
+int Counter::objectCount = 0;
+
+int main() {
+    // Creating multiple Counter objects
+    Counter obj1;
+    Counter obj2;
+    Counter obj3;
+
+    // Displaying the count of objects
+    std::cout << "Number of Counter objects created: " << Counter::getObjectCount() << std::endl;
+
+    return 0;
+}
