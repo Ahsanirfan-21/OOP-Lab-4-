@@ -1,0 +1,46 @@
+#include <iostream>
+
+class Square; // Forward declaration
+
+class Rectangle {
+private:
+    double length;
+    double width;
+
+public:
+    // Constructor
+    Rectangle(double len, double wid) : length(len), width(wid) {}
+
+    // Friend function declaration
+    friend double calculateAreaDifference(const Rectangle& rect, const Square& sq);
+};
+
+class Square {
+private:
+    double side;
+
+public:
+    // Constructor
+    Square(double s) : side(s) {}
+
+    // Friend function declaration
+    friend double calculateAreaDifference(const Rectangle& rect, const Square& sq);
+};
+
+// Friend function definition
+double calculateAreaDifference(const Rectangle& rect, const Square& sq) {
+    double rectangleArea = rect.length * rect.width;
+    double squareArea = sq.side * sq.side;
+    return rectangleArea - squareArea;
+}
+
+int main() {
+    // Creating objects of Rectangle and Square
+    Rectangle rect(10.0, 5.0);
+    Square sq(4.0);
+
+    // Calculating and displaying the area difference
+    std::cout << "The difference between the areas is: " << calculateAreaDifference(rect, sq) << std::endl;
+
+    return 0;
+}
