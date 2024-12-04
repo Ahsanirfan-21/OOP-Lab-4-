@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+
+class Student {
+private:
+    int ID;
+    std::string Name;
+    int Serial_No;
+    int ITC_Marks;
+    int PF_Marks;
+    int OOP_Marks;
+
+public:
+    // Default constructor
+    Student() {
+        ID = 0;
+        Name = "Unknown";
+        Serial_No = 0;
+        ITC_Marks = 0;
+        PF_Marks = 0;
+        OOP_Marks = 0;
+    }
+
+    // Parameterized constructor
+    Student(int id, const std::string& name, int serialNo, int itcMarks, int pfMarks, int oopMarks) {
+        this->ID = id;
+        this->Name = name;
+        this->Serial_No = serialNo;
+        this->ITC_Marks = itcMarks;
+        this->PF_Marks = pfMarks;
+        this->OOP_Marks = oopMarks;
+    }
+
+    // Setters
+    void setID(int id) { this->ID = id; }
+    void setName(const std::string& name) { this->Name = name; }
+    void setSerial_No(int serialNo) { this->Serial_No = serialNo; }
+    void setITC_Marks(int itcMarks) { this->ITC_Marks = itcMarks; }
+    void setPF_Marks(int pfMarks) { this->PF_Marks = pfMarks; }
+    void setOOP_Marks(int oopMarks) { this->OOP_Marks = oopMarks; }
+
+    // Getters
+    int getID() const { return this->ID; }
+    std::string getName() const { return this->Name; }
+    int getSerial_No() const { return this->Serial_No; }
+    int getITC_Marks() const { return this->ITC_Marks; }
+    int getPF_Marks() const { return this->PF_Marks; }
+    int getOOP_Marks() const { return this->OOP_Marks; }
+
+    // Display function
+    void display() const {
+        std::cout << "ID: " << this->ID << std::endl;
+        std::cout << "Name: " << this->Name << std::endl;
+        std::cout << "Serial No: " << this->Serial_No << std::endl;
+        std::cout << "ITC Marks: " << this->ITC_Marks << std::endl;
+        std::cout << "PF Marks: " << this->PF_Marks << std::endl;
+        std::cout << "OOP Marks: " << this->OOP_Marks << std::endl;
+    }
+};
+
+int main() {
+    // Creating a Student object using the default constructor
+    Student student1;
+    student1.display();
+
+    // Creating a Student object using the parameterized constructor
+    Student student2(1, "John Doe", 1001, 85, 90, 88);
+    student2.display();
+
+    return 0;
+}
