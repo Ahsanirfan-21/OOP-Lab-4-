@@ -1,0 +1,128 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book {
+private:
+    int bookID;
+    string title;
+    string author;
+    double price;
+
+public:
+    // Constructors
+    Book() : bookID(0), title("Unknown"), author("Unknown"), price(0.0) {}
+    Book(int id, const string& t, const string& a, double p) : bookID(id), title(t), author(a), price(p) {}
+
+    // Destructor
+    ~Book() {
+        cout << "Book \"" << title << "\" destroyed." << endl;
+    }
+
+    // Setters
+    void setBookID(int id) { bookID = id; }
+    void setTitle(const string& t) { title = t; }
+    void setAuthor(const string& a) { author = a; }
+    void setPrice(double p) { price = p; }
+
+    // Getters
+    int getBookID() const { return bookID; }
+    string getTitle() const { return title; }
+    string getAuthor() const { return author; }
+    double getPrice() const { return price; }
+
+    // Overload << operator
+    friend ostream& operator<<(ostream& os, const Book& book) {
+        os << "Book ID: " << book.bookID << "\nTitle: " << book.title << "\nAuthor: " << book.author << "\nPrice: $" << book.price << endl;
+        return os;
+    }
+};
+
+class Library {
+private:
+    Book* books;
+    int capacity;
+    int totalBooks;
+
+public:
+    // Constructor
+    Library(int cap = 10) : capacity(cap), totalBooks(0) {
+        books = new Book[capacity];
+    }
+
+    // Destructor
+    ~Library() {
+        delete[] books;
+    }
+
+    // Add a book to the library
+    void addBook(const Book& book) {
+        if (totalBooks < capacity) {
+            books[totalBooks++] = book;
+        }
+        else {
+            cout << "Library is full. Cannot add more books." << endl;
+        }
+    }
+
+    // Remove a book by bookID
+    void removeBook(int bookID) {
+        for (int i = 0; i < totalBooks; ++i) {
+            if (books[i].getBookID() == bookID) {
+                for (int j = i; j < totalBooks - 1; ++j) {
+                    books[j] = books[j + 1];
+                }
+                totalBooks--;
+                break;
+            }
+        }
+    }
+
+    // Display all books in the library
+    void displayBooks() const {
+        for (int i = 0; i < totalBooks; ++i) {
+            cout << books[i] << endl;
+        }
+    }
+
+    // Friend function to calculate total value of all books
+    friend double calculateTotalValue(const Library& lib);
+};
+
+double calculateTotalValue(const Library& lib) {
+    double totalValue = 0.0;
+    for (int i = 0; i < lib.totalBooks; ++i) {
+        totalValue += lib.books[i].getPrice();
+    }
+    return totalValue;
+}
+
+int main() {
+    Library lib;
+
+    // Creating book objects
+    Book book1(1, "The Great Gatsby", "F. Scott Fitzgerald", 10.99);
+    Book book2(2, "1984", "George Orwell", 8.99);
+    Book book3(3, "To Kill a Mockingbird", "Harper Lee", 12.99);
+
+    // Adding books to the library
+    lib.addBook(book1);
+    lib.addBook(book2);
+    lib.addBook(book3);
+
+    // Displaying all books in the library
+    cout << "Books in the Library:" << endl;
+    lib.displayBooks();
+
+    // Removing a book from the library
+    lib.removeBook(2);
+
+    // Displaying all books after removal
+    cout << "\nBooks in the Library after removal:" << endl;
+    lib.displayBooks();
+
+    // Calculating and displaying the total value of all books
+    cout << "\nTotal value of all books: $" << calculateTotalValue(lib) << endl;
+
+    return 0;
+}
