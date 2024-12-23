@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Student {
+private:
+    string name;
+    int id;
+    double grade;
+public:
+    void setName(string name) {
+        this->name = name;
+    }
+
+    void setId(int id) {
+        this->id = id;
+    }
+
+    void setGrade(double grade) {
+        this->grade = grade;
+    }
+
+    void setGrade(int grade) {
+        this->grade = grade;
+    }
+
+    string getName() const {
+        return name;
+    }
+
+    int getId() const {
+        return id;
+    }
+
+    double getGrade() const {
+        return grade;
+    }
+};
+
+void updateGrade(Student &student, double newGrade) {
+    student.setGrade(newGrade);
+}
+
+int main() {
+    Student *student1 = new Student();
+    Student *student2 = new Student();
+
+    student1->setName("Alice");
+    student1->setId(101);
+    student1->setGrade(88.5);
+
+    cout << "Student created: " << student1->getName() << " (ID: " << student1->getId() << ", Grade: " << student1->getGrade() << ")\n";
+
+    student1->setName("Alice Johnson");
+    updateGrade(*student1, 90);
+    cout << "Updated Name: " << student1->getName() << "\nGrade updated to: " << student1->getGrade() << "\n";
+
+    // Set default grade
+    student1->setGrade(75.0);
+    cout << "Grade updated to default: " << student1->getGrade() << "\n";
+
+    cout << "Student Details:\nName: " << student1->getName() << "\nID: " << student1->getId() << "\nGrade: " << student1->getGrade() << "\n\n";
+
+    student2->setName("Bob");
+    student2->setId(102);
+    student2->setGrade(75.0); // Default grade
+    cout << "Student created: " << student2->getName() << " (ID: " << student2->getId() << ", Grade: " << student2->getGrade() << ")\n";
+
+    cout << "\nDeleting Student: " << student1->getName() << "\n";
+    delete student1;
+
+    cout << "Deleting Student: " << student2->getName() << "\n";
+    delete student2;
+
+    return 0;
+}
